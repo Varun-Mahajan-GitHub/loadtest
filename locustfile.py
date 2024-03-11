@@ -5,7 +5,10 @@ class MyUser(HttpUser):
 
     @task
     def checkJioEndpoint(self):
-        response = self.client.get('/')
-        assert response.status_code == 200
+        response = self.client.get('/api.php?__call=webapi.get&token=OiQ,UiZBcQI&type=son%5B%E2%80%A6%5D=0&ctx=web6dot0&api_version=4&_format=json&_marker=0')
+        response.raise_for_status()
+        if response.status_code != 200:
+            raise Exception(f"Request failed with status code {response.status_code}")
+
 
 
